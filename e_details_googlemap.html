@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GoogleMap</title>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<link href="../base.css" rel="stylesheet" type="text/css" />
+<script src="https://maps.google.com/maps?file=api&v=2&key=AIzaSyB5GgjitqD4Eb2WCP-70PlLxGJxqnsfewc" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var map;
+    var markers = new Array(3);
+    function onLoad() {
+      map = new GMap2(document.getElementById("map"));
+      map.setCenter(new GLatLng(<?init_lat?>, <?init_lng?>),<?init_zoom?>);	// 初期位置
+      map.addControl(new GLargeMapControl());	// コントロール表示
+      map.addControl(new GMapTypeControl());	// 地図衛星写真切替ボタン表示
+      //map.addControl(new GOverviewMapControl()); // 右下の地図表示
+      map.setMapType(G_NORMAL_MAP);	// 地図で表示
+	  // new GKeyboardHandler(map);	// キーボード操作可能にする i
+      
+	  var icon_new = new GIcon();
+      icon_new.image = '../img/estate/map_icon_new.png';
+	  icon_new.iconSize = new GSize(20, 34);	// 画像の大きさ
+	  icon_new.shadow = '../img/estate/map_icon_shadow.png';
+	  icon_new.shadowSize = new GSize(37, 34);	// 影画像の大きさ
+	  icon_new.iconAnchor = new GPoint(10, 34);	// 画像の「基準点」
+	  icon_new.infoWindowAnchor = new GPoint(10, 5);	// 情報ウィンドウの基準点
+	  
+	  var icon_used = new GIcon();
+      icon_used.image = '../img/estate/map_icon_used.png';
+	  icon_used.iconSize = new GSize(20, 34);	// 画像の大きさ
+	  icon_used.shadow = '../img/estate/map_icon_shadow.png';
+	  icon_used.shadowSize = new GSize(37, 34);	// 影画像の大きさ
+	  icon_used.iconAnchor = new GPoint(10, 34);	// 画像の「基準点」
+	  icon_used.infoWindowAnchor = new GPoint(10, 5);	// 情報ウィンドウの基準点
+	  
+	  var icon_mansion = new GIcon();
+      icon_mansion.image = '../img/estate/map_icon_mansion.png';
+	  icon_mansion.iconSize = new GSize(20, 34);	// 画像の大きさ
+	  icon_mansion.shadow = '../img/estate/map_icon_shadow.png';
+	  icon_mansion.shadowSize = new GSize(37, 34);	// 影画像の大きさ
+	  icon_mansion.iconAnchor = new GPoint(10, 34);	// 画像の「基準点」
+	  icon_mansion.infoWindowAnchor = new GPoint(10, 5);	// 情報ウィンドウの基準点
+	  
+	  var icon_land = new GIcon();
+      icon_land.image = '../img/estate/map_icon_land.png';
+	  icon_land.iconSize = new GSize(20, 34);	// 画像の大きさ
+	  icon_land.shadow = '../img/estate/map_icon_shadow.png';
+	  icon_land.shadowSize = new GSize(37, 34);	// 影画像の大きさ
+	  icon_land.iconAnchor = new GPoint(10, 34);	// 画像の「基準点」
+	  icon_land.infoWindowAnchor = new GPoint(10, 5);	// 情報ウィンドウの基準点
+	  
+	  var marker = null;
+      var n_markers = 0;
+      var markeropts = new Object();
+      marker = new GMarker(new GPoint(<?lng?>,<?lat?>), <?map_icon?>);
+      GEvent.addListener(marker, 'mouseover', function() {
+        this.openInfoWindowHtml('<div style="text-align:left;"><strong><?name?></strong><?new?><br /><?address?><br /><?icon_mode?> <?icon_member?></div>');
+      });
+      markers[n_markers] = marker;
+      n_markers++;
+      map.addOverlay(marker);
+    }
+    //]]>
+</script>
+</head>
+
+<body onload="onLoad()">
+<div id="map" style="width:740px; height:580px; margin:0px; padding:0px;"></div>
+
+<script language="javascript">
+<!--
+document.write('<img src="../w3a/writelog.php?ref='+document.referrer+'" width="1" height="1">');
+// -->
+</script>
+<noscript>
+<img src="../w3a/writelog.php?ref" width="1" height="1">
+</noscript>
+
+</body>
+</html>
